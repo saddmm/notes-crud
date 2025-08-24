@@ -1,13 +1,11 @@
 import express from 'express'
 import 'dotenv/config'
-import AuthRoute from 'src/routes/UserRoute'
-import NoteRoute from 'src/routes/NoteRoute'
+import AuthRoute from 'src/routes/user.route'
+import NoteRoute from 'src/routes/note.route'
 import { AppDataSource } from './database/data-source'
 import 'reflect-metadata'
 
-const server = async () => {
 
-  await AppDataSource.initialize()
   const app = express()
   const { PORT } = process.env
   
@@ -15,9 +13,11 @@ const server = async () => {
   app.use('/api/auth', AuthRoute)
   app.use('/api/notes', NoteRoute)
   
+  AppDataSource.initialize().then(() => {
+    console.log('Database connected')
+  }).catch((error: any) => {
+    console.log('error: ', error)
+  })
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
   })
-}
-
-server()

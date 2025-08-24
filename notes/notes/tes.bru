@@ -7,7 +7,11 @@ meta {
 get {
   url: http://127.0.0.1:3000/api/notes
   body: none
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzYWRhbUBnbWFpbC5jb20iLCJpYXQiOjE3NTU5NzU1MDUsImV4cCI6MTc1NTk3OTEwNX0.rJob-9Zbs1T9H-stdqwQwgZi0AFUoNiA2PoToAhamdc
 }
 
 settings {

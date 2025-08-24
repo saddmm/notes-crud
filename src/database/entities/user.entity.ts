@@ -1,6 +1,6 @@
 import { BaseEntity, BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
 import bcrypt from 'bcrypt'
-import { Note } from './NoteEntity'
+import { Note } from './note.entity'
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -24,8 +24,8 @@ export class User extends BaseEntity {
   })
   password!: string
 
-  @OneToMany(() => Note, (note) => note.user)
-  notes!: Note[]
+  @OneToMany(() => Note, (note) => note.user, {nullable: true, eager: true})
+  notes?: Note[]
 
   @BeforeInsert()
   async hashPassword() {

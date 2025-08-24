@@ -1,9 +1,11 @@
 import { Router } from "express";
-import noteController from "src/controllers/NoteController";
+import { NoteController } from "../controllers/note.controller";
+import { authMiddleware } from "../middleware/auth.middleware";
 
 const router = Router();
+const noteController = new NoteController()
 
-router.get('/', noteController.getAllNotes)
+router.get('/',  authMiddleware, noteController.getAllNotes)
 router.get('/:id', noteController.getNoteById)
 router.post('/', noteController.createNote)
 router.put('/:id', noteController.updateNote)
