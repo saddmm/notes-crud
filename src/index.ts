@@ -1,7 +1,7 @@
 import express from 'express'
 import 'dotenv/config'
-import UserRoute from 'src/routes/user.route'
-import NoteRoute from 'src/routes/note.route'
+import UserRoute from './routes/user.route'
+import NoteRoute from './routes/note.route'
 import { AppDataSource } from './database/data-source'
 import swaggerUi from 'swagger-ui-express'
 import 'reflect-metadata'
@@ -29,6 +29,6 @@ AppDataSource.initialize()
   .catch((error: any) => {
     console.log('error: ', error)
   })
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
+app.listen(PORT || 3000, () => {
+  console.log(`Server is running on port ${PORT || 3000}`)
 })

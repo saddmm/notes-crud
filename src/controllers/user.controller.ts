@@ -1,4 +1,3 @@
-import { validate } from 'class-validator'
 import { UserService } from '../services/user.service'
 import { Request, Response } from 'express'
 
