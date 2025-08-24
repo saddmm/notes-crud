@@ -1,6 +1,6 @@
 import express from 'express'
 import 'dotenv/config'
-import AuthRoute from 'src/routes/user.route'
+import UserRoute from 'src/routes/user.route'
 import NoteRoute from 'src/routes/note.route'
 import { AppDataSource } from './database/data-source'
 import 'reflect-metadata'
@@ -10,7 +10,7 @@ import 'reflect-metadata'
   const { PORT } = process.env
   
   app.use(express.json())
-  app.use('/api/auth', AuthRoute)
+  app.use('/api/users', UserRoute)
   app.use('/api/notes', NoteRoute)
   
   AppDataSource.initialize().then(() => {

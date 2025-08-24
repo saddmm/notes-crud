@@ -1,7 +1,8 @@
+import { validate } from 'class-validator'
 import { UserService } from '../services/user.service'
 import { Request, Response } from 'express'
 
-export class AuthController {
+export class UserController {
   private userService = new UserService()
 
   register = async (req: Request, res: Response) => {
@@ -39,11 +40,15 @@ export class AuthController {
 
   getProfile = async (req: Request, res: Response) => {
     try {
-      const user = this.userService.me(req.user.id)
+      const user = await this.userService.me(req.user!.id)
       return res.status(200).json({
         success: true,
         message: 'Successfully get user',
-        data: user,
+        data: {
+          id: user?.id,
+          username: user?.username,
+          email: user?.email,
+        },
       })
     } catch (error: any) {
       return res.status(400).json({

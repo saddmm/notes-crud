@@ -14,6 +14,6 @@ export class Note extends BaseEntity {
     @Column({type: 'text'})
     content!: string
 
-    @ManyToOne(() => User, (user) => user.notes, {eager: true})
+    @ManyToOne(() => User, (user) => user.notes)
     user!: User
 }

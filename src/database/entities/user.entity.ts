@@ -24,7 +24,7 @@ export class User extends BaseEntity {
   })
   password!: string
 
-  @OneToMany(() => Note, (note) => note.user, {nullable: true, eager: true})
+  @OneToMany(() => Note, (note) => note.user, {nullable: true})
   notes?: Note[]
 
   @BeforeInsert()
