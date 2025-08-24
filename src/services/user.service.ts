@@ -25,11 +25,11 @@ export class UserService {
   login = async (email: string, password: string): Promise<responLogin> => {
     const user = await User.findOneBy({ email })
     if (!user) {
-      throw new Error('Invalid email or password')
+      throw new Error('Invalid email')
     }
     const isValid = await bcrypt.compare(password, user.password)
     if (!isValid) {
-      throw new Error('Invalid email or password')
+      throw new Error('Invalid password')
     }
 
     const payload = {
@@ -44,7 +44,7 @@ export class UserService {
   }
 
   me = async (id: number): Promise<User | null> => {
-    const user = User.findOneBy({ id })
+    const user = await User.findOne({ where: { id }, relations: ['notes'] })
     if (!user) {
       throw new Error('User not found')
     }

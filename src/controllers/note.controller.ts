@@ -36,7 +36,7 @@ export class NoteController {
       })
     }
   }
-  
+
   getMyNotes = async (req: Request, res: Response) => {
     const userId = req.user!.id
     try {
@@ -81,7 +81,7 @@ export class NoteController {
         data: note,
       })
     } catch (error: any) {
-      return res.status(404).json({
+      return res.status(400).json({
         success: false,
         message: error.message,
       })
@@ -91,15 +91,17 @@ export class NoteController {
   deleteNote = async (req: Request, res: Response) => {
     const { id } = req.params
     const userId = req.user!.id
-    const deleted = await this.noteService.deleteNote(Number(id), userId)
-    if (!deleted)
-      return res.status(404).json({
-        success: false,
-        message: 'Note not found',
+    try {
+      await this.noteService.deleteNote(Number(id), userId)
+      return res.status(200).json({
+        success: true,
+        message: 'Delete successfully',
       })
-    return res.status(204).json({
-      success: true,
-      message: 'Delete successfully',
-    })
+    } catch (error: any) {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      })
+    }
   }
 }

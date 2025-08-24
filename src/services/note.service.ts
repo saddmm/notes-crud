@@ -21,7 +21,7 @@ export class NoteService {
   }
 
   getNoteById = async (id: number): Promise<Note | null> => {
-    return Note.findOneBy({ id })
+    return Note.findOne({ where: { id }, relations: ['user'] })
   }
 
   getNoteByIdByUser = async (id: number, userId: number): Promise<Note | null> => {
@@ -34,15 +34,27 @@ export class NoteService {
     content: string,
     userId: number,
   ): Promise<Note | null> => {
-    const note = await this.getNoteByIdByUser(id, userId)
-    if (!note) return null
-    note.title = title
-    note.content = content
+    const note = await this.getNoteById(id)
+    if (!note) {
+      throw new Error('Note not found')
+    }
+    if (note?.user.id !== userId) {
+      throw new Error('You are not authorized to update this note')
+    }
+    if (title) note.title = title
+    if (content) note.content = content
     await note.save()
     return note
   }
 
   deleteNote = async (id: number, userId: number): Promise<boolean> => {
+    const note = await this.getNoteById(id)
+    if (!note) {
+      throw new Error('Note not found')
+    }
+    if (note?.user.id !== userId) {
+      throw new Error('You are not authorized to delete this note')
+    }
     const result = await Note.delete({ id, user: { id: userId } })
     return result.affected !== 0
   }

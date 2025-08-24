@@ -48,6 +48,7 @@ export class UserController {
           id: user?.id,
           username: user?.username,
           email: user?.email,
+          notes: user?.notes
         },
       })
     } catch (error: any) {
