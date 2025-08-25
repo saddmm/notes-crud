@@ -8,7 +8,7 @@ REST API untuk operasi CRUD Notes dengan autentikasi JWT menggunakan Node.js, Ty
 - Docker dan Docker Compose terinstall (Untuk DB dan phpmyadmin)
 - Node.js 18+ (untuk development tanpa Docker)
 
-### 1.  Via docker
+### 1.  Full Docker
 
 ```bash
 # Clone repository
@@ -23,7 +23,7 @@ http://localhost:3000/api
 
 ```
 
-### 2. Manual
+### 2. Menjalankan tanpa build docker
 
 Hapus bagian ini dari docker-compose.yml
 ```bash
