@@ -8,7 +8,42 @@ REST API untuk operasi CRUD Notes dengan autentikasi JWT menggunakan Node.js, Ty
 - Docker dan Docker Compose terinstall (Untuk DB dan phpmyadmin)
 - Node.js 18+ (untuk development tanpa Docker)
 
-### 1.  Cara menjalankan
+### 1.  Via docker
+
+```bash
+# Clone repository
+https://github.com/saddmm/notes-crud.git
+
+# Jalankan Docker Compose
+docker compose up
+
+#Tunggu sampai terdapat pesan "Database Connected"
+Aplikasi siap di jalankan
+http://localhost:3000/api
+
+```
+
+### 2. Manual
+
+Hapus bagian ini dari docker-compose.yml
+```bash
+  app:
+    build: .
+    container_name: crud-notes
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
+    depends_on:
+      - db
+```
+
+Kemudian jalankan
 
 ```bash
 # Clone repository
