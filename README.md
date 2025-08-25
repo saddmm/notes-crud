@@ -1,6 +1,6 @@
 # Notes CRUD API
 
-REST API untuk operasi CRUD catatan dengan autentikasi JWT menggunakan Node.js, TypeScript, Express, TypeORM, dan MySQL.
+REST API untuk operasi CRUD Notes dengan autentikasi JWT menggunakan Node.js, TypeScript, Express, TypeORM, dan MySQL.
 
 ## 🚀 Cara Menjalankan Program
 
@@ -11,11 +11,14 @@ REST API untuk operasi CRUD catatan dengan autentikasi JWT menggunakan Node.js, 
 ### 1.  Cara menjalankan
 
 ```bash
+# Clone repository
+https://github.com/saddmm/notes-crud.git
+
 # Install dependencies
 npm install
 
 # Install MySQL & PhpMyAdmin (via docker)
-docker compose up -d
+docker compose up
 
 # Jalankan development server
 npm run dev
@@ -35,7 +38,7 @@ DB_USERNAME=root
 DB_PASSWORD=root
 DB_NAME=notes
 PORT=3000
-JWT_SECRET=your-secret-key (string acak)
+JWT_SECRET=your-secret-key(string acak)
 ```
 
 ### Documentation
