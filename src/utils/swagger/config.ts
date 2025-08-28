@@ -1,5 +1,9 @@
 import swaggerJsdoc from 'swagger-jsdoc'
 
+const fileExtension = process.env.NODE_ENV === 'production' ? '.js' : '.ts'
+
+const sourceFolder = process.env.NODE_ENV === 'production' ? './dist' : './src'
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -33,9 +37,9 @@ const options = {
     }
   },
   apis: [
-    './src/routes/*.ts',
-    './src/utils/swagger/*.ts',
-    './src/dto/*.ts'
+    `${sourceFolder}/routes/*${fileExtension}`,
+    `${sourceFolder}/utils/swagger/*${fileExtension}`,
+    `${sourceFolder}/dto/*${fileExtension}`
   ]
 }
 
